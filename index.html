@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup with Js</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        text-align: center;
+        background-color: #f7f7f7;
+        color: #000;
+        padding-top: 50px;
+    }
+    h1{
+        font-size: 60px;
+        text-transform: capitalize;
+        color: purple;
+        margin-bottom: 20px;
+    }
+    .click-button{
+        font-size: 16px;
+        border: 1px solid purple;
+        background-color: purple;
+        color: white;
+        padding: 10px 35px;
+        border-radius: 10px;
+        text-transform: capitalize;
+    }
+    .click-button:hover{
+        background-color: transparent;
+        color: purple;
+    }
+    .popup{
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.568);
+        display: flex;
+        opacity: 0;
+        visibility: hidden;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: .3s ease-in-out;
+    }
+    .popup.open{
+        /* display: flex; */
+        opacity: 1;
+        visibility: visible;
+    }
+    .popup.open>div{
+        animation: popupFade .5s ease-in-out;
+    }
+    @keyframes popupFade {
+        0%{
+            transform: translateY(-400px);
+        }
+        100%{
+            transform: translateY(0);
+        }
+    }
+    .popup-content{
+        padding: 30px;
+        background-color: white;
+        max-width: 500px;
+        height: fit-content;
+        border-radius: 10px;
+    }
+    .popup-close {
+        height: 20px;
+        width: 20px;
+        position: relative;
+        margin-left: auto;
+        margin-bottom: -26px;
+        margin-right: 6px;
+        cursor: pointer;
+    }
+    .popup-close span{
+        display: block;
+        width: 100%;
+        background-color: purple;
+        height: 3px;
+        position: absolute;
+        top: 50%;
+    }
+    .popup-close .line-1{
+        left: 0;
+        transform: rotate(45deg);
+    }
+    .popup-close .line-2{
+        right: 0;
+        transform: rotate(-45deg);
+    }
+    
+
+    .popup-content p{
+        margin-top: 10px;
+    }
+    </style>
+</head>
+<body>
+    <h1>Create popup with js</h1>
+    <button class="click-button">click for open popup</button>
+    <div class="popup" id="popup">
+        <div>
+            <div class="popup-close">
+                <span class="line-1"></span>
+                <span class="line-2"></span>
+            </div>
+            <div class="popup-content">
+                <h2>Popup has been opened</h2>
+                <p>This popup has made with javascript addEventListener process. you can open this popup by click button and close anywhere and also close click on cross icon. But note that: popup will not close if you click on popup box.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let clickBtn = document.querySelector(".click-button");
+        let popup = document.querySelector("#popup");
+        let body= document.querySelector("body");
+        let closepopup = document.querySelector(".popup-close")
+
+
+        clickBtn.addEventListener("click", () => {
+            popup.classList.add("open");
+        })
+        closepopup.addEventListener("click", () => {
+            popup.classList.remove("open");
+        })
+        body.addEventListener("click", (event) => { 
+            if(event.target.id==="popup"){
+                popup.classList.remove("open");
+            }
+        })
+    </script>
+</body>
+</html>
